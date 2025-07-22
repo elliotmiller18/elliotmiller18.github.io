@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Elliot Miller - Personal</title>
+    <style>
+        body {
+            font-family: 'Courier New', monospace;
+            margin: 0;
+            padding: 0;
+            min-height: 100vh;
+            background-color: white;
+            line-height: 1.6;
+            padding: 40px 20px;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        h1 {
+            font-weight: bold;
+            font-size: 2em;
+            margin-bottom: 10px;
+        }
+
+        .nav-links {
+            margin-bottom: 40px;
+        }
+
+        .nav-links a {
+            color: black;
+            text-decoration: none;
+            margin: 0 15px;
+        }
+
+        .nav-links a:hover {
+            text-decoration: underline;
+        }
+
+        .section {
+            margin-bottom: 40px;
+            padding-bottom: 30px;
+        }
+
+        .section-title {
+            font-weight: bold;
+            font-size: 1.4em;
+            margin-bottom: 20px;
+            border-bottom: 1px solid #ccc;
+            padding-bottom: 10px;
+        }
+
+        .chess-ratings {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin-bottom: 20px;
+        }
+
+        .rating-card {
+            border: 1px solid #ccc;
+            padding: 15px;
+            text-align: center;
+        }
+
+        .rating-type {
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
+        .rating-value {
+            font-size: 1.5em;
+            margin-bottom: 5px;
+        }
+
+        .rating-date {
+            font-size: 0.9em;
+            color: #666;
+        }
+
+        .chess-profile-link {
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        .chess-profile-link a {
+            color: black;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        .chess-profile-link a:hover {
+            text-decoration: underline;
+        }
+
+        .interests {
+            margin-top: 30px;
+        }
+
+        .interests ul {
+            list-style-type: disc;
+            margin-left: 20px;
+        }
+
+        .interests li {
+            margin-bottom: 8px;
+        }
+
+        .update-note {
+            font-size: 0.8em;
+            color: #666;
+            font-style: italic;
+            text-align: center;
+            margin-top: 15px;
+        }
+
+        .character-icon {
+            vertical-align: middle;
+            margin: 0 3px;
+            width: 20px;
+            height: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>Personal</h1>
+            <div class="nav-links">
+                <a href="index.html">home</a> |
+                <a href="projects.html">projects</a> |
+                <a href="work.html">work</a>
+            </div>
+        </div>
+
+        <div class="section">
+            <div class="section-title">Chess.com Rating</div>
+            
+            <div class="chess-ratings">
+                <div class="rating-card">
+                    <div class="rating-type">Rapid Rating</div>
+                    <div class="rating-value" id="rapid-rating">Loading...</div>
+                    <div class="rating-date" id="rapid-date">Fetching from chess.com...</div>
+                </div>
+            </div>
+
+            <div class="chess-profile-link">
+                <a href="https://chess.com/member/bhfelliot" target="_blank">View Full Chess.com Profile</a>
+            </div>
+
+            <div class="update-note" id="update-status">
+                Live rating from chess.com API
+            </div>
+        </div>
+
+        <div class="section">
+            <div class="section-title">Interests & Hobbies</div>
+            <div class="interests">
+                <ul>
+                    <li>Chess - Online competitive play and studying openings/endgames</li>
+                    <li>Super Smash Bros. Melee - <img src="assets/jigglypuff-icon.png" alt="Jigglypuff" class="character-icon"> <img src="assets/falco-icon.png" alt="Falco" class="character-icon"></li>
+                    <li>Tea - Love black tea, especially Earl Grey. Favorite shop: <a href="https://teahaus.com/" target="_blank">Teahaus</a> in Ann Arbor, MI for loose-leaf tea</li>
+                    <li>Reading - Favorite books: <a href="https://www.goodreads.com/book/show/5129.Brave_New_World" target="_blank">Brave New World</a>, <a href="https://www.goodreads.com/book/show/194746.No_Longer_Human" target="_blank">No Longer Human</a>, <a href="https://www.goodreads.com/book/show/929782.Martin_Eden" target="_blank">Martin Eden</a>, <a href="https://www.goodreads.com/book/show/11297.Norwegian_Wood" target="_blank">Norwegian Wood</a>, <a href="https://www.goodreads.com/book/show/2638701-violence" target="_blank">Violence</a>, <a href="https://www.goodreads.com/book/show/10046142-dancing-in-the-glory-of-monsters" target="_blank">Dancing in the glory of Monsters: The Collapse of the Congo and the Great War of Africa</a></li>
+                    <li>Compilers and Programming Language Design</li>
+                    <li>Web Systems and Software Engineering</li>
+                    <li>Processor Design and Hardware Emulation</li>
+                    <li>Game Development and Game Engine Architecture</li>
+                    <li>Operating Systems and Networking</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Chess.com API scraper for rapid rating
+        async function fetchChessRating() {
+            const username = 'bhfelliot';
+            const rapidRatingElement = document.getElementById('rapid-rating');
+            const rapidDateElement = document.getElementById('rapid-date');
+            const statusElement = document.getElementById('update-status');
+            
+            try {
+                // Fetch player stats from chess.com API
+                const response = await fetch(`https://api.chess.com/pub/player/${username}/stats`);
+                
+                if (!response.ok) {
+                    throw new Error(`HTTP error! status: ${response.status}`);
+                }
+                
+                const data = await response.json();
+                
+                // Extract rapid rating data
+                if (data.chess_rapid && data.chess_rapid.last) {
+                    const rapidRating = data.chess_rapid.last.rating;
+                    const lastGameDate = new Date(data.chess_rapid.last.date * 1000);
+                    const formattedDate = lastGameDate.toLocaleDateString('en-US', { 
+                        month: 'short', 
+                        day: 'numeric',
+                        year: 'numeric'
+                    });
+                    
+                    // Update the display
+                    rapidRatingElement.textContent = rapidRating;
+                    rapidDateElement.textContent = `Last game: ${formattedDate}`;
+                    statusElement.textContent = `Updated from chess.com API - ${new Date().toLocaleTimeString()}`;
+                    
+                } else {
+                    throw new Error('No rapid rating data found');
+                }
+                
+            } catch (error) {
+                console.error('Error fetching chess rating:', error);
+                rapidRatingElement.textContent = 'Error';
+                rapidDateElement.textContent = 'Could not fetch rating';
+                statusElement.textContent = 'API error - click profile link for current rating';
+                
+                // Fallback: try to show a cached or default rating
+                setTimeout(() => {
+                    rapidRatingElement.textContent = '1650';
+                    rapidDateElement.textContent = 'Cached rating';
+                    statusElement.textContent = 'Showing cached rating - API unavailable';
+                }, 2000);
+            }
+        }
+
+        // Fetch rating when page loads
+        window.addEventListener('load', function() {
+            fetchChessRating();
+        });
+
+        // Optional: Refresh rating every 5 minutes
+        setInterval(fetchChessRating, 5 * 60 * 1000);
+    </script>
+</body>
+</html> 

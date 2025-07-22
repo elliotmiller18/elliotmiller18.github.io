@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Elliot Miller - Work Experience</title>
+    <style>
+        body {
+            font-family: 'Courier New', monospace;
+            margin: 0;
+            padding: 0;
+            min-height: 100vh;
+            background-color: white;
+            line-height: 1.6;
+            padding: 40px 20px;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        h1 {
+            font-weight: bold;
+            font-size: 2em;
+            margin-bottom: 10px;
+        }
+
+        .nav-links {
+            margin-bottom: 40px;
+        }
+
+        .nav-links a {
+            color: black;
+            text-decoration: none;
+            margin: 0 15px;
+        }
+
+        .nav-links a:hover {
+            text-decoration: underline;
+        }
+
+        .job {
+            margin-bottom: 40px;
+            border-bottom: 1px solid #ccc;
+            padding-bottom: 30px;
+        }
+
+        .job:last-child {
+            border-bottom: none;
+        }
+
+        .job-header {
+            margin-bottom: 15px;
+        }
+
+        .job-title {
+            font-weight: bold;
+            font-size: 1.3em;
+        }
+
+        .job-dates {
+            font-style: italic;
+            margin-bottom: 5px;
+        }
+
+        .company-location {
+            margin-bottom: 10px;
+        }
+
+        .company-location a {
+            color: black;
+            text-decoration: none;
+        }
+
+        .company-location a:hover {
+            text-decoration: underline;
+        }
+
+        .job-description {
+            margin-left: 20px;
+        }
+
+        .job-description ul {
+            list-style-type: disc;
+            margin-left: 20px;
+        }
+
+        .job-description li {
+            margin-bottom: 10px;
+        }
+
+        .education-section {
+            margin-top: 50px;
+            padding-top: 30px;
+        }
+
+        .education-title {
+            font-weight: bold;
+            font-size: 1.5em;
+            margin-bottom: 20px;
+        }
+
+        .education-item {
+            margin-bottom: 15px;
+        }
+
+        .education-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: baseline;
+            margin-bottom: 5px;
+        }
+
+        .school-name {
+            font-weight: bold;
+            font-size: 1.2em;
+        }
+
+        .degree {
+            font-style: italic;
+            margin-bottom: 10px;
+        }
+
+        .coursework {
+            margin-left: 20px;
+            font-size: 0.95em;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>Work Experience</h1>
+            <div class="nav-links">
+                <a href="index.html">home</a> |
+                <a href="projects.html">projects</a> |
+                <a href="personal.html">personal</a>
+            </div>
+        </div>
+
+        <div class="job">
+            <div class="job-header">
+                <div class="job-title">Backend Developer (TypeScript)</div>
+                <div class="job-dates">May 2025 – August 2025</div>
+                <div class="company-location">
+                    <a href="https://wisepelican.com/" target="_blank">Wise Pelican</a> - Phoenix, AZ
+                </div>
+            </div>
+            <div class="job-description">
+                <ul>
+                    <li>Was an integral part of 3 person team that created and shipped <strong>Power Concierge</strong>, an autonomous AI agent that provided marketing services to Wise Pelican subscribers</li>
+                    <li>Wrote AWS Serverless Lambdas in Typescript for many purposes, including image processing, SMS/MMS handling, and interfacing with human sales.</li>
+                    <li>Migrated applications from Azure to AWS ECS with a full Codepipeline CI/CD setup, decreasing performance degradation during traffic spikes by 50% and removing 2 second AWS to Azure performance bottleneck in application.</li>
+                    <li>Wrote complex, low-level internal tools including a from-scratch fast JPEG metadata decoder, cutting off over 95% of runtime from the previous implementation.</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="job">
+            <div class="job-header">
+                <div class="job-title">Software Developer (JavaScript, Python)</div>
+                <div class="job-dates">January 2025 – May 2025</div>
+                <div class="company-location">
+                    <a href="https://www.demand-engine.net/" target="_blank">DemandEngine</a> - Ann Arbor, MI
+                </div>
+            </div>
+            <div class="job-description">
+                <ul>
+                    <li>Developed the entire backend using Django and designed and managed the PostgreSQL database.</li>
+                    <li>Wrote comprehensive OpenAPI documentation for all API endpoints.</li>
+                    <li>Optimized React.js codebase, reducing UI element latency on landing page by 75%.</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="education-section">
+            <div class="education-title">Education</div>
+            <div class="education-item">
+                <div class="education-header">
+                    <div class="school-name">University of Michigan</div>
+                    <div>Ann Arbor, MI</div>
+                </div>
+                <div class="degree">Bachelor of Computer Science - Expected May 2027</div>
+                <div class="coursework">
+                    <strong>Relevant Coursework:</strong> Data Structures and Algorithms, Computer Theory, Computer Organization, Web Systems, Operating Systems, Compilers, Linear Algebra, Calculus, Discrete Math, Game Development, Programming Language Theory
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html> 
