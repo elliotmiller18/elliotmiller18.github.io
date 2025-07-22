@@ -128,6 +128,21 @@
             width: 20px;
             height: 20px;
         }
+
+        .rating-progress {
+            font-size: 0.9em;
+            margin-top: 8px;
+            color: #333;
+            font-weight: bold;
+        }
+
+        .rating-increase {
+            color: #22c55e;
+        }
+
+        .rating-decrease {
+            color: #ef4444;
+        }
     </style>
 </head>
 <body>
@@ -149,6 +164,7 @@
                     <div class="rating-type">Rapid Rating</div>
                     <div class="rating-value" id="rapid-rating">Loading...</div>
                     <div class="rating-date" id="rapid-date">Fetching from chess.com...</div>
+                    <div class="rating-progress" id="rating-progress">Progress since May 2025: calculating...</div>
                 </div>
             </div>
 
@@ -169,6 +185,7 @@
                     <li>Super Smash Bros. Melee - <img src="assets/jigglypuff-icon.png" alt="Jigglypuff" class="character-icon"> <img src="assets/falco-icon.png" alt="Falco" class="character-icon"></li>
                     <li>Tea - Love black tea, especially Earl Grey. Favorite shop: <a href="https://teahaus.com/" target="_blank">Teahaus</a> in Ann Arbor, MI for loose-leaf tea</li>
                     <li>Reading - Favorite books: <a href="https://www.goodreads.com/book/show/5129.Brave_New_World" target="_blank">Brave New World</a>, <a href="https://www.goodreads.com/book/show/194746.No_Longer_Human" target="_blank">No Longer Human</a>, <a href="https://www.goodreads.com/book/show/929782.Martin_Eden" target="_blank">Martin Eden</a>, <a href="https://www.goodreads.com/book/show/11297.Norwegian_Wood" target="_blank">Norwegian Wood</a>, <a href="https://www.goodreads.com/book/show/2638701-violence" target="_blank">Violence</a>, <a href="https://www.goodreads.com/book/show/10046142-dancing-in-the-glory-of-monsters" target="_blank">Dancing in the glory of Monsters: The Collapse of the Congo and the Great War of Africa</a></li>
+                    <li>Chinese - 我们说中文吧!</li>
                     <li>Compilers and Programming Language Design</li>
                     <li>Web Systems and Software Engineering</li>
                     <li>Processor Design and Hardware Emulation</li>
@@ -207,9 +224,27 @@
                         year: 'numeric'
                     });
                     
+                    // Calculate progress since May 2025
+                    const may2025Rating = 965;
+                    const ratingChange = rapidRating - may2025Rating;
+                    const progressElement = document.getElementById('rating-progress');
+                    
+                    let progressText = `Progress since starting consistently playing chess (May 2025): `;
+                    if (ratingChange > 0) {
+                        progressText += `+${ratingChange} points`;
+                        progressElement.className = 'rating-progress rating-increase';
+                    } else if (ratingChange < 0) {
+                        progressText += `${ratingChange} points`;
+                        progressElement.className = 'rating-progress rating-decrease';
+                    } else {
+                        progressText += `No change`;
+                        progressElement.className = 'rating-progress';
+                    }
+                    
                     // Update the display
                     rapidRatingElement.textContent = rapidRating;
                     rapidDateElement.textContent = `Last game: ${formattedDate}`;
+                    progressElement.textContent = progressText;
                     statusElement.textContent = `Updated from chess.com API - ${new Date().toLocaleTimeString()}`;
                     
                 } else {
@@ -224,8 +259,17 @@
                 
                 // Fallback: try to show a cached or default rating
                 setTimeout(() => {
-                    rapidRatingElement.textContent = '1650';
+                    const cachedRating = 1650;
+                    const may2025Rating = 965;
+                    const cachedChange = cachedRating - may2025Rating;
+                    
+                    rapidRatingElement.textContent = cachedRating;
                     rapidDateElement.textContent = 'Cached rating';
+                    
+                    const progressElement = document.getElementById('rating-progress');
+                    progressElement.textContent = `Progress since May 2025: +${cachedChange} points`;
+                    progressElement.className = 'rating-progress rating-increase';
+                    
                     statusElement.textContent = 'Showing cached rating - API unavailable';
                 }, 2000);
             }
