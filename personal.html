@@ -164,7 +164,7 @@
                     <div class="rating-type">Rapid Rating</div>
                     <div class="rating-value" id="rapid-rating">Loading...</div>
                     <div class="rating-date" id="rapid-date">Fetching from chess.com...</div>
-                    <div class="rating-progress" id="rating-progress">Progress since May 2025: calculating...</div>
+                    <div class="rating-progress" id="rating-progress">Progress since April 2025: calculating...</div>
                 </div>
             </div>
 
@@ -224,12 +224,12 @@
                         year: 'numeric'
                     });
                     
-                    // Calculate progress since May 2025
-                    const may2025Rating = 965;
-                    const ratingChange = rapidRating - may2025Rating;
+                    // Calculate progress since April 2025
+                    const april2025Rating = 909;
+                    const ratingChange = rapidRating - april2025Rating;
                     const progressElement = document.getElementById('rating-progress');
                     
-                    let progressText = `Progress since starting consistently playing chess (May 2025): `;
+                    let progressText = `Progress since starting consistently playing chess (April 2025): `;
                     if (ratingChange > 0) {
                         progressText += `+${ratingChange} points`;
                         progressElement.className = 'rating-progress rating-increase';
@@ -259,15 +259,15 @@
                 
                 // Fallback: try to show a cached or default rating
                 setTimeout(() => {
-                    const cachedRating = 1650;
-                    const may2025Rating = 965;
-                    const cachedChange = cachedRating - may2025Rating;
+                    const cachedRating = 1277;
+                    const april2025Rating = 909;
+                    const cachedChange = cachedRating - april2025Rating;
                     
                     rapidRatingElement.textContent = cachedRating;
                     rapidDateElement.textContent = 'Cached rating';
                     
                     const progressElement = document.getElementById('rating-progress');
-                    progressElement.textContent = `Progress since May 2025: +${cachedChange} points`;
+                    progressElement.textContent = `Progress since April 2025: +${cachedChange} points`;
                     progressElement.className = 'rating-progress rating-increase';
                     
                     statusElement.textContent = 'Showing cached rating - API unavailable';
