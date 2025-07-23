@@ -1,0 +1,364 @@
+body {
+    font-family: 'Courier New', monospace;
+    margin: 0;
+    padding: 0;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: white;
+    line-height: 1.6;
+}
+
+.container {
+    text-align: center;
+    max-width: 600px;
+    padding: 40px;
+}
+
+h1 {
+    font-weight: bold;
+    font-size: 2em;
+    margin-bottom: 2px;
+}
+
+.small-subtitle {
+    font-size: 0.7em;
+    margin-top: -10px;
+    margin-bottom: 5px;
+    color: #666;
+    font-style: italic;
+    font-weight: bold;
+}
+
+.small-subtitle a {
+    color: #666;
+    text-decoration: none;
+}
+
+.small-subtitle a:hover {
+    text-decoration: underline;
+}
+
+.subtitle {
+    font-size: 1.1em;
+    margin-bottom: 40px;
+}
+
+.contact-line {
+    margin: 20px 0;
+    font-size: 1em;
+}
+
+.contact-line a {
+    color: black;
+    text-decoration: none;
+}
+
+.contact-line a:hover {
+    text-decoration: underline;
+}
+
+.links-section {
+    margin-top: 40px;
+    text-align: center;
+}
+
+.links-section a {
+    display: block;
+    color: black;
+    text-decoration: none;
+    margin: 15px 0;
+    font-size: 1em;
+}
+
+.links-section a:hover {
+    text-decoration: underline;
+}
+
+.resume-line {
+    margin: 15px 0;
+    display: inline;
+}
+
+.resume-line a {
+    color: black;
+    text-decoration: none;
+    margin: 8px 10px;
+}
+
+.resume-line a:hover {
+    text-decoration: underline;
+}
+
+.umich-blue {
+    color: #FFCB05;
+    background-color: #00274C;
+    padding: 2px 6px;
+    border-radius: 3px;
+    text-decoration: none;
+}
+
+.umich-blue:hover {
+    text-decoration: underline;
+}
+
+.black-link {
+    color: black;
+    text-decoration: none;
+}
+
+.black-link:hover {
+    text-decoration: underline;
+}
+
+/* Page-specific styles */
+.header {
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+.nav-links {
+    margin-bottom: 40px;
+}
+
+.nav-links a {
+    color: black;
+    text-decoration: none;
+    margin: 0 15px;
+}
+
+.nav-links a:hover {
+    text-decoration: underline;
+}
+
+.section {
+    margin-bottom: 40px;
+    padding-bottom: 30px;
+}
+
+.section-title {
+    font-weight: bold;
+    font-size: 1.4em;
+    margin-bottom: 20px;
+    border-bottom: 1px solid #ccc;
+    padding-bottom: 10px;
+}
+
+.chess-ratings {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 20px;
+    margin-bottom: 20px;
+}
+
+.rating-card {
+    border: 1px solid #ccc;
+    padding: 15px;
+    text-align: center;
+}
+
+.rating-type {
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+.rating-value {
+    font-size: 1.5em;
+    margin-bottom: 5px;
+}
+
+.rating-date {
+    font-size: 0.9em;
+    color: #666;
+}
+
+.rating-progress {
+    font-size: 0.9em;
+    margin-top: 8px;
+    color: #333;
+    font-weight: bold;
+}
+
+.rating-increase {
+    color: #22c55e;
+}
+
+.rating-decrease {
+    color: #ef4444;
+}
+
+.chess-profile-link {
+    text-align: center;
+    margin-top: 20px;
+}
+
+.chess-profile-link a {
+    color: black;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.chess-profile-link a:hover {
+    text-decoration: underline;
+}
+
+.interests {
+    margin-top: 30px;
+}
+
+.interests ul {
+    list-style-type: disc;
+    margin-left: 20px;
+}
+
+.interests li {
+    margin-bottom: 8px;
+}
+
+.character-icon {
+    vertical-align: middle;
+    margin: 0 3px;
+    width: 20px;
+    height: 20px;
+}
+
+.update-note {
+    font-size: 0.8em;
+    color: #666;
+    font-style: italic;
+    text-align: center;
+    margin-top: 15px;
+}
+
+.project {
+    margin-bottom: 30px;
+    border-bottom: 1px solid #ccc;
+    padding-bottom: 20px;
+}
+
+.project:last-child {
+    border-bottom: none;
+}
+
+.project-title {
+    font-weight: bold;
+    font-size: 1.2em;
+    margin-bottom: 10px;
+}
+
+.project-title a {
+    color: black;
+    text-decoration: none;
+}
+
+.project-title a:hover {
+    text-decoration: underline;
+}
+
+.project-description {
+    margin-left: 20px;
+}
+
+.project-description ul {
+    list-style-type: disc;
+    margin-left: 20px;
+}
+
+.project-description li {
+    margin-bottom: 8px;
+}
+
+.status {
+    font-size: 0.8em;
+    font-style: italic;
+    color: #666;
+}
+
+.job {
+    margin-bottom: 40px;
+    border-bottom: 1px solid #ccc;
+    padding-bottom: 30px;
+}
+
+.job:last-child {
+    border-bottom: none;
+}
+
+.job-header {
+    margin-bottom: 15px;
+}
+
+.job-title {
+    font-weight: bold;
+    font-size: 1.3em;
+}
+
+.job-dates {
+    font-style: italic;
+    margin-bottom: 5px;
+}
+
+.company-location {
+    margin-bottom: 10px;
+}
+
+.company-location a {
+    color: black;
+    text-decoration: none;
+}
+
+.company-location a:hover {
+    text-decoration: underline;
+}
+
+.job-description {
+    margin-left: 20px;
+}
+
+.job-description ul {
+    list-style-type: disc;
+    margin-left: 20px;
+}
+
+.job-description li {
+    margin-bottom: 10px;
+}
+
+.education-section {
+    margin-top: 50px;
+    padding-top: 30px;
+}
+
+.education-title {
+    font-weight: bold;
+    font-size: 1.5em;
+    margin-bottom: 20px;
+}
+
+.education-item {
+    margin-bottom: 15px;
+}
+
+.education-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    margin-bottom: 5px;
+}
+
+.school-name {
+    font-weight: bold;
+    font-size: 1.2em;
+}
+
+.degree {
+    font-style: italic;
+    margin-bottom: 10px;
+}
+
+.coursework {
+    margin-left: 20px;
+    font-size: 0.95em;
+} 
