@@ -183,7 +183,7 @@
                 <div class="section-title">Interests & Hobbies</div>
                 <div class="interests">
                     <ul>
-                        <li>Super Smash Bros. Melee - <img src="assets/jigglypuff-icon.png" alt="Jigglypuff" class="character-icon"><img src="assets/falco-icon.png" alt="Falco" class="character-icon"></li>
+                        <li>Super Smash Bros. Melee - <img src="assets/jigglypuff-icon.png" alt="Jigglypuff" class="character-icon" id="jigglypuff-icon" style="cursor: pointer;"><img src="assets/falco-icon.png" alt="Falco" class="character-icon" id="falco-icon" style="cursor: pointer;"></li>
                         <li>Chess - I play The Queen's Gambit and am looking for a new opening with black.</li>
                         <li>Tea - Love black tea, especially Earl Grey. Favorite shop: <a href="https://teahaus.com/" target="_blank">Teahaus</a> in Ann Arbor, MI for loose-leaf tea</li>
                         <li>Reading - Favorite books: <a href="https://www.goodreads.com/book/show/5129.Brave_New_World" target="_blank">Brave New World</a>, <a href="https://www.goodreads.com/book/show/194746.No_Longer_Human" target="_blank">No Longer Human</a>, <a href="https://www.goodreads.com/book/show/929782.Martin_Eden" target="_blank">Martin Eden</a>, <a href="https://www.goodreads.com/book/show/11297.Norwegian_Wood" target="_blank">Norwegian Wood</a>, <a href="https://www.goodreads.com/book/show/2638701-violence" target="_blank">Violence</a>, <a href="https://www.goodreads.com/book/show/10046142-dancing-in-the-Glory-of-monsters" target="_blank">Dancing in the glory of Monsters: The Collapse of the Congo and the Great War of Africa</a></li>
@@ -283,6 +283,24 @@
 
         // Optional: Refresh rating every 5 minutes
         setInterval(fetchChessRating, 5 * 60 * 1000);
+
+        // Reusable function for character sound effects
+        function addCharacterSound(iconId, audioSrc, volume = 0.035) {
+            const icon = document.getElementById(iconId);
+            const audio = new Audio(audioSrc);
+            audio.volume = volume;
+
+            icon.addEventListener('click', function() {
+                audio.currentTime = 0; // Reset to start if already playing
+                audio.play().catch(function(error) {
+                    console.log('Audio playback failed:', error);
+                });
+            });
+        }
+
+        // Add sound effects for both characters
+        addCharacterSound('jigglypuff-icon', 'assets/Ping.ogg');
+        addCharacterSound('falco-icon', 'assets/falco.mp3');
     </script>
 </body>
 </html> 
