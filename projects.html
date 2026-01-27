@@ -128,11 +128,26 @@
 
         <div class="project">
             <div class="project-title">
+                ChAsm (C, ARM Assembly) <a href="https://github.com/elliotmiller18/chasm" target="_blank" class="github-link">github</a>
+            </div>
+            <div class="project-description">
+                <ul>
+                    <li>Wrote a from-scratch graphical chess implementation in ARM assembly with a C/SDL event bridge and renderer</li>
+                    <li>No C stdlib calls from ARM; manual dynamic memory management</li>
+                    <li>Optimized with SIMD instructions while keeping total memory usage under a single L1 cache line</li>
+                    <li>Implemented all core game and rendering logic directly in assembly with no external libraries</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="project">
+            <div class="project-title">
                 Snake Compiler (Rust, x86)
             </div>
             <div class="project-description">
                 <ul>
-                    <li>Wrote an x86 emitting, optimizing compiler for a Python/OCaml hybrid language called Snake.</li>
+                    <li>Wrote an x86 emitting, optimizing compiler for a Python/OCaml hybrid language called Snake</li>
+                    <li>Supports Rust interop, register allocation, dead code elimination, and dynamic typing, using lattices to eliminate unnecessary type checks</li>
                 </ul>
             </div>
         </div>
@@ -147,19 +162,7 @@
                 </ul>
             </div>
         </div>
-        
-        <div class="project">
-            <div class="project-title">
-                NES Zelda Clone (Unity) <a href="https://elliotmiller18.itch.io/zelda-clone" target="_blank" class="github-link">itch.io</a>
-            </div>
-            <div class="project-description">
-                <ul>
-                    <li>Reimplemented the first dungeon from the original NES Legend of Zelda in Unity in a team of 2</li>
-                    <li>Wrote logic for interactable game objects (doors/pushable blocks/camera panning), movement (player/enemy/projectile), and a set of custom challenge levels</li>
-                </ul>
-            </div>
-        </div>
-        
+
         <div class="project">
             <div class="project-title">
                 Wordle Bot (Python) <a href="https://github.com/elliotmiller18/wordle_bot" target="_blank" class="github-link">github</a>
@@ -168,18 +171,6 @@
                 <ul>
                     <li>Created a Wordle algorithm using a mix of heuristics including frequency of words/characters in the English language, scoring words and sorting them by likelihood</li> 
                     <li>Achieves an average guess count of 3.36 over the last 2 years of words, compared to the human average of 3.97</li>
-                </ul>
-            </div>
-        </div>
-
-        <div class="project">
-            <div class="project-title">
-                MapReduce Implementation (Python)
-            </div>
-            <div class="project-description">
-                <ul>
-                    <li>Created an efficient recreation of the MapReduce algorithm using a distributed systems setup</li>
-                    <li>Wrote communication protocols between the Manager and Worker servers</li>
                 </ul>
             </div>
         </div>
