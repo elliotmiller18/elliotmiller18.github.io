@@ -241,12 +241,8 @@
                 </div>
             </div>
 
-            <div class="chess-profile-link">
-                <a href="https://chess.com/member/bhfelliot" target="_blank">View Full Chess.com Profile</a>
-            </div>
-
             <div class="chess-fun-stats">
-                <div class="chess-fun-title">Rapid activity snapshot (past <span id="rapid-days">30</span> days)</div>
+                <div class="chess-fun-title">past <span id="rapid-days">30</span> days</div>
                 <div class="chess-fun-grid">
                     <div class="chess-fun-item">
                         <div class="chess-fun-label">Win ratio</div>
@@ -259,16 +255,16 @@
                     <div class="chess-fun-item">
                         <div class="chess-fun-label">Last 5 rapid games</div>
                         <div class="chess-game-dots" id="rapid-game-dots">Loading...</div>
-                        <div class="chess-fun-sub">Click a dot to open the game</div>
                     </div>
                 </div>
             </div>
 
-            <div class="update-note" id="update-status">
-                Live rating from chess.com API
+            <div class="chess-profile-link">
+                <a href="https://chess.com/member/bhfelliot" target="_blank">View Full Chess.com Profile</a>
             </div>
-            <div class="update-note">
-                (if this is stuck loading chess.com api can be unresponsive)
+
+            <div class="update-note" id="update-status">
+                Live rating from chess.com API (if this is stuck loading chess.com api can be unresponsive)
             </div>
         </div>
 
@@ -520,7 +516,7 @@
 
                 dotsElement.innerHTML = '';
                 if (totalGames > 0) {
-                    const lastFive = recentGames.slice(-5).reverse();
+                    const lastFive = recentGames.slice(-5);
                     for (const game of lastFive) {
                         const side = getPlayerSide(game);
                         const result = game[side]?.result;
