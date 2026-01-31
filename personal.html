@@ -144,6 +144,78 @@
         .rating-decrease {
             color: #ef4444;
         }
+
+        .chess-fun-stats {
+            border: 1px solid #ccc;
+            padding: 15px;
+            margin-top: 20px;
+        }
+
+        .chess-fun-title {
+            font-weight: bold;
+            margin-bottom: 12px;
+            text-align: center;
+        }
+
+        .chess-fun-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 15px;
+        }
+
+        .chess-fun-item {
+            border: 1px solid #eee;
+            padding: 10px;
+            text-align: center;
+        }
+
+        .chess-fun-label {
+            font-weight: bold;
+            margin-bottom: 6px;
+        }
+
+        .chess-fun-value {
+            font-size: 1.05em;
+        }
+
+        .chess-game-dots {
+            display: flex;
+            gap: 8px;
+            justify-content: center;
+            align-items: center;
+            flex-wrap: wrap;
+            margin-top: 8px;
+        }
+
+        .game-dot-link {
+            display: inline-flex;
+        }
+
+        .game-dot {
+            width: 14px;
+            height: 14px;
+            border-radius: 50%;
+            display: inline-block;
+            border: 1px solid #333;
+        }
+
+        .game-win {
+            background: #22c55e;
+        }
+
+        .game-loss {
+            background: #ef4444;
+        }
+
+        .game-draw {
+            background: #9ca3af;
+        }
+
+        .chess-fun-sub {
+            font-size: 0.85em;
+            color: #666;
+            margin-top: 6px;
+        }
     </style>
 </head>
 <body>
@@ -173,8 +245,30 @@
                 <a href="https://chess.com/member/bhfelliot" target="_blank">View Full Chess.com Profile</a>
             </div>
 
+            <div class="chess-fun-stats">
+                <div class="chess-fun-title">Rapid activity snapshot (past <span id="rapid-days">30</span> days)</div>
+                <div class="chess-fun-grid">
+                    <div class="chess-fun-item">
+                        <div class="chess-fun-label">Win ratio</div>
+                        <div class="chess-fun-value" id="rapid-win-ratio">Loading...</div>
+                    </div>
+                    <div class="chess-fun-item">
+                        <div class="chess-fun-label">Rating +/-</div>
+                        <div class="chess-fun-value" id="rapid-rating-change">Loading...</div>
+                    </div>
+                    <div class="chess-fun-item">
+                        <div class="chess-fun-label">Last 5 rapid games</div>
+                        <div class="chess-game-dots" id="rapid-game-dots">Loading...</div>
+                        <div class="chess-fun-sub">Click a dot to open the game</div>
+                    </div>
+                </div>
+            </div>
+
             <div class="update-note" id="update-status">
                 Live rating from chess.com API
+            </div>
+            <div class="update-note">
+                (if this is stuck loading chess.com api can be unresponsive)
             </div>
         </div>
 
@@ -274,13 +368,197 @@
             }
         }
 
+        async function fetchRapidGameStats() {
+            const username = 'bhfelliot';
+            const DAYS = 30;
+            const winRatioElement = document.getElementById('rapid-win-ratio');
+            const ratingChangeElement = document.getElementById('rapid-rating-change');
+            const dotsElement = document.getElementById('rapid-game-dots');
+            const statusElement = document.getElementById('update-status');
+
+            document.getElementById('rapid-days').textContent = DAYS;
+            document.getElementById('rapid-days-2').textContent = DAYS;
+
+            const drawResults = new Set([
+                'stalemate',
+                'agreed',
+                'repetition',
+                'insufficient',
+                'timevsinsufficient',
+                '50move'
+            ]);
+
+            const cutoff = Math.floor(Date.now() / 1000) - DAYS * 24 * 60 * 60;
+
+            try {
+                const archivesResponse = await fetch(`https://api.chess.com/pub/player/${username}/games/archives`);
+                if (!archivesResponse.ok) {
+                    throw new Error(`Archives HTTP error! status: ${archivesResponse.status}`);
+                }
+
+                const archivesData = await archivesResponse.json();
+                const archives = archivesData.archives || [];
+                if (!archives.length) {
+                    throw new Error('No archives found');
+                }
+
+                const recentGames = [];
+
+                for (let i = archives.length - 1; i >= 0; i--) {
+                    const archiveUrl = archives[i];
+                    const parts = archiveUrl.split('/');
+                    const month = parseInt(parts[parts.length - 1], 10);
+                    const year = parseInt(parts[parts.length - 2], 10);
+
+                    if (!Number.isNaN(year) && !Number.isNaN(month)) {
+                        const endOfMonth = new Date(year, month, 0, 23, 59, 59);
+                        if (endOfMonth.getTime() / 1000 < cutoff) {
+                            break;
+                        }
+                    }
+
+                    const gamesResponse = await fetch(archiveUrl);
+                    if (!gamesResponse.ok) {
+                        throw new Error(`Games HTTP error! status: ${gamesResponse.status}`);
+                    }
+
+                    const gamesData = await gamesResponse.json();
+                    const games = gamesData.games || [];
+
+                    for (const game of games) {
+                        if (game.time_class !== 'rapid') {
+                            continue;
+                        }
+                        if (game.end_time < cutoff) {
+                            continue;
+                        }
+                        const whiteUser = game.white?.username?.toLowerCase();
+                        const blackUser = game.black?.username?.toLowerCase();
+                        if (whiteUser !== username && blackUser !== username) {
+                            continue;
+                        }
+                        recentGames.push(game);
+                    }
+                }
+
+                recentGames.sort((a, b) => a.end_time - b.end_time);
+
+                const totalGames = recentGames.length;
+                let wins = 0;
+                let losses = 0;
+                let draws = 0;
+
+                function getPlayerSide(game) {
+                    const whiteUser = game.white?.username?.toLowerCase();
+                    if (whiteUser === username) {
+                        return 'white';
+                    }
+                    return 'black';
+                }
+
+                function getResultType(result) {
+                    if (result === 'win') {
+                        return 'win';
+                    }
+                    if (drawResults.has(result)) {
+                        return 'draw';
+                    }
+                    return 'loss';
+                }
+
+                for (const game of recentGames) {
+                    const side = getPlayerSide(game);
+                    const result = game[side]?.result;
+                    const resultType = getResultType(result);
+                    if (resultType === 'win') {
+                        wins += 1;
+                    } else if (resultType === 'draw') {
+                        draws += 1;
+                    } else {
+                        losses += 1;
+                    }
+                }
+
+                if (totalGames > 0) {
+                    const winRatio = Math.round((wins / totalGames) * 100);
+                    winRatioElement.textContent = `${winRatio}% (${wins}W-${losses}L-${draws}D)`;
+                } else {
+                    winRatioElement.textContent = 'No rapid games';
+                }
+
+                if (totalGames > 0) {
+                    const firstGame = recentGames[0];
+                    const lastGame = recentGames[totalGames - 1];
+                    const firstSide = getPlayerSide(firstGame);
+                    const lastSide = getPlayerSide(lastGame);
+                    const firstRating = firstGame[firstSide]?.rating ?? 0;
+                    const lastRating = lastGame[lastSide]?.rating ?? 0;
+                    const ratingChange = lastRating - firstRating;
+                    const ratingText = ratingChange > 0 ? `+${ratingChange}` : `${ratingChange}`;
+                    ratingChangeElement.textContent = ratingText;
+                    ratingChangeElement.className = 'chess-fun-value';
+                    if (ratingChange > 0) {
+                        ratingChangeElement.classList.add('rating-increase');
+                    } else if (ratingChange < 0) {
+                        ratingChangeElement.classList.add('rating-decrease');
+                    }
+                } else {
+                    ratingChangeElement.textContent = 'N/A';
+                    ratingChangeElement.className = 'chess-fun-value';
+                }
+
+                dotsElement.innerHTML = '';
+                if (totalGames > 0) {
+                    const lastFive = recentGames.slice(-5).reverse();
+                    for (const game of lastFive) {
+                        const side = getPlayerSide(game);
+                        const result = game[side]?.result;
+                        const resultType = getResultType(result);
+                        const opponent = side === 'white' ? game.black?.username : game.white?.username;
+                        const endDate = new Date(game.end_time * 1000).toLocaleDateString('en-US', {
+                            month: 'short',
+                            day: 'numeric',
+                            year: 'numeric'
+                        });
+
+                        const dot = document.createElement('span');
+                        dot.className = `game-dot game-${resultType}`;
+
+                        const link = document.createElement('a');
+                        link.className = 'game-dot-link';
+                        link.href = game.url || '#';
+                        link.target = '_blank';
+                        link.rel = 'noopener';
+                        link.title = `${resultType.toUpperCase()} vs ${opponent || 'opponent'} on ${endDate}`;
+                        link.appendChild(dot);
+                        dotsElement.appendChild(link);
+                    }
+                } else {
+                    dotsElement.textContent = 'No rapid games yet';
+                }
+
+                statusElement.textContent = `Updated from chess.com API - ${new Date().toLocaleTimeString()}`;
+            } catch (error) {
+                console.error('Error fetching rapid game stats:', error);
+                winRatioElement.textContent = 'Unavailable';
+                ratingChangeElement.textContent = 'Unavailable';
+                ratingChangeElement.className = 'chess-fun-value';
+                dotsElement.textContent = 'API error';
+                statusElement.textContent = 'API error - click profile link for current rating';
+            }
+        }
+
         // Fetch rating when page loads
         window.addEventListener('load', function() {
             fetchChessRating();
+            fetchRapidGameStats();
         });
 
         // Optional: Refresh rating every 5 minutes
-        setInterval(fetchChessRating, 5 * 60 * 1000);
+        setInterval(function() {
+            fetchChessRating();
+            fetchRapidGameStats();
+        }, 5 * 60 * 1000);
 
         // Reusable function for character sound effects
         function addCharacterSound(iconId, audioSrc, volume = 0.035) {
