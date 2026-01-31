@@ -376,8 +376,19 @@
             const dotsElement = document.getElementById('rapid-game-dots');
             const statusElement = document.getElementById('update-status');
 
-            document.getElementById('rapid-days').textContent = DAYS;
-            document.getElementById('rapid-days-2').textContent = DAYS;
+            const daysTitle = document.getElementById('rapid-days');
+            const daysWin = document.getElementById('rapid-days-1');
+            const daysRating = document.getElementById('rapid-days-2');
+
+            if (daysTitle) {
+                daysTitle.textContent = DAYS;
+            }
+            if (daysWin) {
+                daysWin.textContent = DAYS;
+            }
+            if (daysRating) {
+                daysRating.textContent = DAYS;
+            }
 
             const drawResults = new Set([
                 'stalemate',
