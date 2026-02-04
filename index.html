@@ -8,16 +8,7 @@
     <link rel="stylesheet" href="styles.css">
     <link rel="stylesheet" href="dropdowns.css">
     <script data-goatcounter="https://elliotmiller18.goatcounter.com/count"
-            async src="https://gc.zgo.at/count.js"></script>
-    <style>
-        #visitor-counter {
-            position: fixed;
-            left: 16px;
-            bottom: 16px;
-            z-index: 10;
-            font-size: 12px;
-        }
-    </style>
+            async src="//gc.zgo.at/count.js"></script>
 </head>
 <body>
     <div id="dropdowns-root"></div>
@@ -52,34 +43,5 @@
         </div>
 
     </div>
-
-    <div id="visitor-counter" aria-live="polite">you&#39;re visitor #—</div>
-    <script>
-        (function () {
-            var endpoint = 'https://elliotmiller18.goatcounter.com/counter//.html';
-            fetch(endpoint)
-                .then(function (r) { return r.text(); })
-                .then(function (html) {
-                    var el = document.getElementById('visitor-counter');
-                    if (!el || !html) return;
-                    var doc = new DOMParser().parseFromString(html, 'text/html');
-                    var views = doc.getElementById('gcvc-views');
-                    if (views && views.textContent) {
-                        el.textContent = "you're visitor #" + views.textContent.trim();
-                        return;
-                    }
-                    var match = html.match(/<span[^>]*id=["']gcvc-views["'][^>]*>(\d+)<\/span>/i);
-                    if (match && match[1]) {
-                        el.textContent = "you're visitor #" + match[1];
-                        return;
-                    }
-                    el.textContent = "turn off your adblocker";
-                })
-                .catch(function () {
-                    var el = document.getElementById('visitor-counter');
-                    if (el) el.textContent = "turn off your adblocker D:";
-                });
-        })();
-    </script>
 </body>
 </html>
