@@ -62,10 +62,8 @@
     padding: 12px;
 }
 
-.skills-dropdown:hover .skills-panel,
-.skills-dropdown:focus-within .skills-panel,
-.accomplishment-dropdown:hover .accomplishment-panel,
-.accomplishment-dropdown:focus-within .accomplishment-panel {
+.skills-dropdown.is-open .skills-panel,
+.accomplishment-dropdown.is-open .accomplishment-panel {
     opacity: 1;
     transform: translateY(0);
     pointer-events: auto;

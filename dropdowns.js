@@ -6,7 +6,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     root.innerHTML = `
 <div class="skills-dropdown" aria-label="Skills">
-    <button class="skills-button" type="button" aria-haspopup="true">skills ▾</button>
+    <button class="skills-button" type="button" aria-haspopup="true" aria-expanded="false">skills ▾</button>
     <div class="skills-panel" role="menu" aria-label="Skills list">
         <div class="skills-section">
             <div class="skills-section-title">Languages</div>
@@ -42,7 +42,7 @@ document.addEventListener("DOMContentLoaded", () => {
     </div>
 </div>
 <div class="accomplishment-dropdown" aria-label="Greatest accomplishment">
-    <button class="skills-button" type="button" aria-haspopup="true">my greatest accomplishment ▾</button>
+    <button class="skills-button" type="button" aria-haspopup="true" aria-expanded="false">my greatest accomplishment ▾</button>
     <div class="accomplishment-panel" role="menu" aria-label="Stack Overflow ranking">
         <a href="https://stackoverflow.com/questions/79686427/why-do-bit-operators-have-such-low-precedence-in-c-and-c" target="_blank">
             <img src="stackoverflow.png" alt="Stack Overflow ranking" class="accomplishment-image">
@@ -50,4 +50,33 @@ document.addEventListener("DOMContentLoaded", () => {
     </div>
 </div>
 `;
+
+    const dropdowns = Array.from(root.querySelectorAll(".skills-dropdown, .accomplishment-dropdown"));
+    const buttons = Array.from(root.querySelectorAll(".skills-button"));
+
+    const closeAll = () => {
+        dropdowns.forEach((dropdown) => dropdown.classList.remove("is-open"));
+        buttons.forEach((button) => button.setAttribute("aria-expanded", "false"));
+    };
+
+    root.addEventListener("click", (event) => {
+        const button = event.target.closest(".skills-button");
+        if (!button) {
+            return;
+        }
+
+        event.stopPropagation();
+        const dropdown = button.closest(".skills-dropdown, .accomplishment-dropdown");
+        const isOpen = dropdown.classList.contains("is-open");
+
+        closeAll();
+        if (!isOpen) {
+            dropdown.classList.add("is-open");
+            button.setAttribute("aria-expanded", "true");
+        }
+    });
+
+    document.addEventListener("click", () => {
+        closeAll();
+    });
 });
