@@ -103,6 +103,21 @@
             text-decoration: underline;
         }
 
+        .chess-embed-toggle {
+            background: none;
+            border: none;
+            padding: 0;
+            font: inherit;
+            color: black;
+            font-weight: bold;
+            cursor: pointer;
+            text-decoration: none;
+        }
+
+        .chess-embed-toggle:hover {
+            text-decoration: underline;
+        }
+
         .interests {
             margin-top: 30px;
         }
@@ -223,6 +238,35 @@
             color: #666;
             margin-top: 6px;
         }
+
+        .chess-magnum {
+            border: 1px solid #ccc;
+            padding: 15px;
+            margin-top: 20px;
+        }
+
+        .chess-embed {
+            max-height: 0;
+            opacity: 0;
+            overflow: hidden;
+            pointer-events: none;
+            transition: max-height 0.35s ease, opacity 0.2s ease;
+            border: 0;
+            padding: 0;
+        }
+
+        .chess-embed.is-open {
+            max-height: 2000px;
+            opacity: 1;
+            pointer-events: auto;
+            border: 1px solid #eee;
+            padding: 8px;
+        }
+
+        .chess-link-sep {
+            margin: 0 10px;
+            color: #666;
+        }
     </style>
 </head>
 <body>
@@ -269,11 +313,19 @@
             </div>
 
             <div class="chess-profile-link">
-                <a href="https://chess.com/member/bhfelliot" target="_blank">View Full Chess.com Profile</a>
+                <button class="chess-embed-toggle" id="toggle-chess-embed" aria-expanded="false" aria-controls="chess-embed">View my best game</button>
+                <span class="chess-link-sep">|</span>
+                <a href="https://chess.com/member/bhfelliot" target="_blank">View full chess.com profile (leave website)</a>
             </div>
 
             <div class="update-note" id="update-status">
                 Live rating from chess.com API (if this is stuck loading chess.com api can be unresponsive)
+            </div>
+
+            <div class="chess-magnum">
+                <div class="chess-embed" id="chess-embed">
+                    <iframe id="14615259" allowtransparency="true" frameborder="0" style="width:100%;border:none;" src="https://www.chess.com/emboard?id=14615259"></iframe><script nonce="chesscom-diagram">window.addEventListener("message",e=>{e['data']&&"14615259"===e['data']['id']&&document.getElementById(`${e['data']['id']}`)&&(document.getElementById(`${e['data']['id']}`).style.height=`${e['data']['frameHeight']+37}px`)});</script>
+                </div>
             </div>
         </div>
 
@@ -568,6 +620,26 @@
         window.addEventListener('load', function() {
             fetchChessRating();
             fetchRapidGameStats();
+
+            const toggle = document.getElementById('toggle-chess-embed');
+            const embed = document.getElementById('chess-embed');
+
+            if (toggle && embed) {
+                const setOpen = (open, shouldScroll) => {
+                    embed.classList.toggle('is-open', open);
+                    toggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+                    // No auto-scroll on open/close.
+                };
+
+                toggle.addEventListener('click', function() {
+                    const isOpen = embed.classList.contains('is-open');
+                    setOpen(!isOpen, false);
+                });
+
+                if (window.location.hash === '#chess-embed') {
+                    setOpen(true, false);
+                }
+            }
         });
 
         // Optional: Refresh rating every 5 minutes
