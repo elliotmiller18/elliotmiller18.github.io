@@ -47,6 +47,17 @@
             text-decoration: underline;
         }
 
+        .interests a,
+        .sites-collection a {
+            color: black;
+            text-decoration: none;
+        }
+
+        .interests a:hover,
+        .sites-collection a:hover {
+            text-decoration: underline;
+        }
+
         .section {
             margin-bottom: 40px;
             padding-bottom: 30px;
@@ -267,6 +278,20 @@
             margin: 0 10px;
             color: #666;
         }
+
+        .sites-collection {
+            border: 1px solid #ccc;
+            padding: 15px;
+        }
+
+        .sites-collection ul {
+            list-style-type: disc;
+            margin-left: 20px;
+        }
+
+        .sites-collection li {
+            margin-bottom: 8px;
+        }
     </style>
 </head>
 <body>
@@ -330,18 +355,26 @@
         </div>
 
         <div class="section">
-            <div class="section">
-                <div class="section-title">Interests & Hobbies</div>
-                <div class="interests">
-                    <ul>
-                        <li>Super Smash Bros. Melee - <img src="assets/jigglypuff-icon.png" alt="Jigglypuff" class="character-icon" id="jigglypuff-icon" style="cursor: pointer;"><img src="assets/falco-icon.png" alt="Falco" class="character-icon" id="falco-icon" style="cursor: pointer;"></li>
-                        <li>Chess - I play The Queen's Gambit and am looking for a new opening with black.</li>
-                        <li>Tea - Love black tea, especially Earl Grey. Favorite shop: <a href="https://teahaus.com/" target="_blank">Teahaus</a> in Ann Arbor, MI for loose-leaf tea</li>
-                        <li>Reading - Favorite books: <a href="https://www.goodreads.com/book/show/1617.Night" target="_blank">Night</a> (my favorite, won the author a Nobel Peace Prize), <a href="https://www.goodreads.com/book/show/5129.Brave_New_World" target="_blank">Brave New World</a>, <a href="https://www.goodreads.com/book/show/194746.No_Longer_Human" target="_blank">No Longer Human</a>, <a href="https://www.goodreads.com/book/show/929782.Martin_Eden" target="_blank">Martin Eden</a>, <a href="https://www.goodreads.com/book/show/11297.Norwegian_Wood" target="_blank">Norwegian Wood</a>, <a href="https://www.goodreads.com/book/show/2638701-violence" target="_blank">Violence</a>, <a href="https://www.goodreads.com/book/show/10046142-dancing-in-the-Glory-of-monsters" target="_blank">Dancing in the glory of Monsters: The Collapse of the Congo and the Great War of Africa</a></li>
-                        <li>Chinese - 我们说中文吧!</li>
-                        <li>Processor Design and Hardware Emulation - Check out my <a href="https://github.com/elliotmiller18/gb-emulator" target="_blank">Gameboy emulator</a></li>
-                    </ul>
-                </div>
+            <div class="section-title">Interests & Hobbies (most of this is clickable!)</div>
+            <div class="interests">
+                <ul>
+                    <li>Super Smash Bros. Melee - <img src="assets/jigglypuff-icon.png" alt="Jigglypuff" class="character-icon" id="jigglypuff-icon" style="cursor: pointer;"><img src="assets/falco-icon.png" alt="Falco" class="character-icon" id="falco-icon" style="cursor: pointer;"></li>
+                    <li>Chess - I play The Queen's Gambit and am looking for a new opening with black.</li>
+                    <li>Tea - Love black tea, especially Earl Grey. Favorite shop: <a href="https://teahaus.com/" target="_blank">Teahaus</a> in Ann Arbor, MI for loose-leaf tea</li>
+                    <li>Reading - Favorite books: <a href="https://www.goodreads.com/book/show/1617.Night" target="_blank">Night</a> (my favorite, won the author a Nobel Peace Prize), <a href="https://www.goodreads.com/book/show/5129.Brave_New_World" target="_blank">Brave New World</a>, <a href="https://www.goodreads.com/book/show/194746.No_Longer_Human" target="_blank">No Longer Human</a>, <a href="https://www.goodreads.com/book/show/929782.Martin_Eden" target="_blank">Martin Eden</a>, <a href="https://www.goodreads.com/book/show/11297.Norwegian_Wood" target="_blank">Norwegian Wood</a>, <a href="https://www.goodreads.com/book/show/2638701-violence" target="_blank">Violence</a>, <a href="https://www.goodreads.com/book/show/10046142-dancing-in-the-Glory-of-monsters" target="_blank">Dancing in the glory of Monsters: The Collapse of the Congo and the Great War of Africa</a></li>
+                    <li>Chinese - 我们说中文吧!</li>
+                    <li>Processor Design and Hardware Emulation - Check out my <a href="https://github.com/elliotmiller18/gb-emulator" target="_blank">Gameboy emulator</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="section">
+            <div class="section-title">Websites I Like</div>
+            <div class="sites-collection">
+                <ul>
+                    <li><a href="https://gbdev.io/pandocs/" target="_blank" rel="noopener">Gameboy hardware documentation (super in depth, really interesting)</a></li>
+                    <li><a href="https://www.preflophands.com/" target="_blank" rel="noopener">Old school Poker preflop hand ranking</a></li>
+                    <li><a href="https://linkedin-or-interpol.com/" target="_blank" rel="noopener">LinkedIn or Interpol guessing game</a></li>
+                </ul>
             </div>
         </div>
     </div>
