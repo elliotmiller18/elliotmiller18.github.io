@@ -59,6 +59,8 @@
     grid-template-columns: repeat(3, minmax(140px, 1fr));
     gap: 18px;
     min-width: 560px;
+    width: min(560px, calc(100vw - 32px));
+    max-width: calc(100vw - 32px);
     align-items: start;
 }
 
@@ -164,7 +166,9 @@
     .skills-panel {
         grid-template-columns: 1fr;
         gap: 10px;
-        min-width: 200px;
+        min-width: 0;
+        width: calc(100vw - 32px);
+        max-width: calc(100vw - 32px);
     }
 
     .skill-item::after {
