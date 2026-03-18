@@ -61,6 +61,12 @@
     min-width: 560px;
     width: min(560px, calc(100vw - 32px));
     max-width: calc(100vw - 32px);
+    max-height: calc(100vh - 80px);
+    overflow-y: auto;
+    overflow-x: hidden;
+    overscroll-behavior: contain;
+    -webkit-overflow-scrolling: touch;
+    touch-action: pan-y;
     align-items: start;
 }
 
