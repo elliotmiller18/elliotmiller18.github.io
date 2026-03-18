@@ -11,7 +11,7 @@ document.addEventListener("DOMContentLoaded", () => {
         <div class="skills-section">
             <div class="skills-section-title">Languages</div>
             <ul class="skills-list">
-                <li><span class="skill-item" data-source="Classes: Compilers · Projects: Snake Compiler · Work: Apple, N1">Rust</span></li>
+                <li><span class="skill-item" data-source="Classes: Compilers · Projects: Snake Compiler, P2P Fileshare · Work: Apple, N1">Rust</span></li>
                 <li><span class="skill-item" data-source="Classes: Operating Systems, Data Structures and Algorithms · Projects: Game Boy Emulator, Multithreading Library">C++</span></li>
                 <li><span class="skill-item" data-source="Classes: Computer Organization · Projects: ChAsm">C</span></li>
                 <li><span class="skill-item" data-source="Classes: Compilers · Projects: Snake Compiler">x86</span></li>
@@ -27,6 +27,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 <li><span class="skill-item" data-source="Projects: Game Boy Emulator, ChAsm">SDL</span></li>
                 <li><span class="skill-item" data-source="Classes: Web Systems · Work: Wise Pelican">AWS CDK/SDK</span></li>
                 <li><span class="skill-item" data-source="Classes: Game Development · Projects: Platformer, Tower Defense Game">Unity</span></li>
+                <li><span class="skill-item" data-source="Work: N1 · Projects: P2P Fileshare">Tokio</span></li>
             </ul>
         </div>
         <div class="skills-section">
