@@ -43,7 +43,7 @@ document.addEventListener("DOMContentLoaded", () => {
     </div>
 </div>
 <div class="accomplishment-dropdown" aria-label="Greatest accomplishment">
-    <button class="skills-button" type="button" aria-haspopup="true" aria-expanded="false">#3 on stackoverflow ▾</button>
+    <button class="skills-button" type="button" aria-haspopup="true" aria-expanded="false">my greatest accomplishment (proof) ▾</button>
     <div class="accomplishment-panel" role="menu" aria-label="Stack Overflow ranking">
         <a href="https://stackoverflow.com/questions/79686427/why-do-bit-operators-have-such-low-precedence-in-c-and-c" target="_blank">
             <img src="stackoverflow.png" alt="Stack Overflow ranking" class="accomplishment-image">
